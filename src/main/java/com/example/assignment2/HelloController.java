@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class HelloController {
 
@@ -132,20 +133,53 @@ public class HelloController {
       userInput.setText(userInput.getText() + "Z");
    }
 
-   public void onClick(ActionEvent actionEvent) {
-
-   }
-   private HashMap<Character, Integer> letterCounts; // Map of letter -> count
 
    @FXML
-   public void onSubmit (ActionEvent event) {
-      String userWord = userInput.getText();
+   public void onClick (ActionEvent event) {
+      String userWord = userInput.getText().toUpperCase();
+      int pointValue = calculatePoint(userWord);
+      point.setText(String.valueOf(pointValue));
 
 
+   }
+   private int calculatePoint(String word) {
+      Map<Character, Integer> pointOfLetter = new HashMap<Character, Integer>();
+      pointOfLetter.put('A', 1);
+      pointOfLetter.put('B', 3);
+      pointOfLetter.put('C', 3);
+      pointOfLetter.put('D', 2);
+      pointOfLetter.put('E', 1);
+      pointOfLetter.put('F', 4);
+      pointOfLetter.put('G', 2);
+      pointOfLetter.put('H', 4);
+      pointOfLetter.put('I', 1);
+      pointOfLetter.put('J', 8);
+      pointOfLetter.put('K', 5);
+      pointOfLetter.put('L', 1);
+      pointOfLetter.put('M', 3);
+      pointOfLetter.put('N', 1);
+      pointOfLetter.put('O', 1);
+      pointOfLetter.put('P', 3);
+      pointOfLetter.put('Q', 10);
+      pointOfLetter.put('R', 1);
+      pointOfLetter.put('S', 1);
+      pointOfLetter.put('T', 1);
+      pointOfLetter.put('U', 1);
+      pointOfLetter.put('V', 4);
+      pointOfLetter.put('W', 4);
+      pointOfLetter.put('X', 8);
+      pointOfLetter.put('Y', 4);
+      pointOfLetter.put('Z', 10);
+      int pointValue = 0;
+      for (int i = 0; i < word.length(); i++) {
+         char letter = word.charAt(i);
+         pointValue += pointOfLetter.get(letter);
+      }
+      return pointValue;
    }
    public void LetterBag() {
       // Initialize the letter counts to their default values
-      letterCounts = new HashMap<Character, Integer>();
+      HashMap<Character, Integer> letterCounts = new HashMap<Character, Integer>();
       letterCounts.put('A', 9);
       letterCounts.put('B', 2);
       letterCounts.put('C', 2);
