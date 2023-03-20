@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HelloController {
-   String newWordDisplay = "";
+  static String newWordDisplay = "";
 
    ArrayList<String> newAddedWordList = new ArrayList<String>();
    @FXML
@@ -140,11 +140,17 @@ public class HelloController {
    @FXML
    public void onClick (ActionEvent event) {
       String userWord = userInput.getText().toUpperCase();
-      StoredWord(userWord);
-      userInput.setText("");
       ModelClass modelClass = new ModelClass(userWord);
-      int pointValue = calculatePoint(userWord);
-      point.setText(String.valueOf(pointValue));
+      errorMsg.setText(modelClass.isWordValid(userWord));
+      if(errorMsg.getText().equals("")){
+         StoredWord(userWord);
+         int pointValue = calculatePoint(userWord);
+         point.setText(String.valueOf(pointValue));
+      }
+
+      userInput.setText("");
+
+
    }
 
    public void StoredWord(String word){
