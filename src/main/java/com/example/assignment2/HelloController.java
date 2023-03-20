@@ -144,8 +144,7 @@ public class HelloController {
       errorMsg.setText(modelClass.isWordValid(userWord));
       if(errorMsg.getText().equals("")){
          StoredWord(userWord);
-         int pointValue = calculatePoint(userWord);
-         point.setText(String.valueOf(pointValue));
+         point.setText(calculatePoint(userWord));
       }
 
       userInput.setText("");
@@ -170,7 +169,7 @@ public class HelloController {
 
 
    }
-   private int calculatePoint(String word) {
+   private String calculatePoint(String word) {
       Map<Character, Integer> pointOfLetter = new HashMap<Character, Integer>();
       pointOfLetter.put('A', 1);
       pointOfLetter.put('B', 3);
@@ -203,7 +202,7 @@ public class HelloController {
          char letter = word.charAt(i);
          pointValue += pointOfLetter.get(letter);
       }
-      return pointValue;
+      return String.valueOf(pointValue);
    }
 
 
