@@ -8,11 +8,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HelloController {
+   String newWordDisplay = "";
 
+   ArrayList<String> newAddedWordList = new ArrayList<String>();
    @FXML
    TextField userInput;
    @FXML
@@ -137,8 +140,27 @@ public class HelloController {
    @FXML
    public void onClick (ActionEvent event) {
       String userWord = userInput.getText().toUpperCase();
+      StoredWord(userWord);
+      userInput.setText("");
+      ModelClass modelClass = new ModelClass(userWord);
       int pointValue = calculatePoint(userWord);
       point.setText(String.valueOf(pointValue));
+   }
+
+   public void StoredWord(String word){
+      if (newAddedWordList.size() == 0) {
+         newWordDisplay = word;
+      }
+      // if previous words list has at least one word,
+      // previous world + ", " + new word
+      else {
+         newWordDisplay = newWordDisplay + ", " + userInput.getText().toUpperCase();
+      }
+
+      newAddedWordList.add(userInput.getText().toUpperCase());
+
+      // display all words
+       storeWords.setText(newWordDisplay);
 
 
    }
@@ -176,37 +198,6 @@ public class HelloController {
          pointValue += pointOfLetter.get(letter);
       }
       return pointValue;
-   }
-   public void LetterBag() {
-      // Initialize the letter counts to their default values
-      HashMap<Character, Integer> letterCounts = new HashMap<Character, Integer>();
-      letterCounts.put('A', 9);
-      letterCounts.put('B', 2);
-      letterCounts.put('C', 2);
-      letterCounts.put('D', 4);
-      letterCounts.put('E', 12);
-      letterCounts.put('F', 2);
-      letterCounts.put('G', 3);
-      letterCounts.put('H', 2);
-      letterCounts.put('I', 8);
-      letterCounts.put('J', 1);
-      letterCounts.put('K', 1);
-      letterCounts.put('L', 4);
-      letterCounts.put('M', 2);
-      letterCounts.put('N', 6);
-      letterCounts.put('O', 8);
-      letterCounts.put('P', 2);
-      letterCounts.put('Q', 1);
-      letterCounts.put('R', 6);
-      letterCounts.put('S', 4);
-      letterCounts.put('T', 6);
-      letterCounts.put('U', 4);
-      letterCounts.put('V', 2);
-      letterCounts.put('W', 2);
-      letterCounts.put('X', 1);
-      letterCounts.put('Y', 2);
-      letterCounts.put('Z', 1);
-
    }
 
 
